@@ -36,7 +36,7 @@ module ActiveRecord
               b << Field.new(name: "type", value: "yesno")
               b << Field.new(name: "sql", value: "${TABLE}.#{attribute} ;;")
             end
-          when ActiveModel::Type::String
+          when ActiveModel::Type::String,  ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Uuid
             Block.new(type: "dimension", name: attribute) do |b|
               b << Field.new(name: "type", value: "string")
               b << Field.new(name: "sql", value: "${TABLE}.#{attribute} ;;")
@@ -67,7 +67,7 @@ module ActiveRecord
 
         def attribute_type_to_set_detail_field(attribute, type)
           case type
-          when ActiveModel::Type::Integer, ActiveModel::Type::Boolean, ActiveModel::Type::String, ActiveRecord::Enum::EnumType
+          when ActiveModel::Type::Integer, ActiveModel::Type::Boolean, ActiveModel::Type::String, ActiveRecord::Enum::EnumType, ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Uuid
             attribute
           when ActiveRecord::Type::DateTime, ActiveRecord::AttributeMethods::TimeZoneConversion::TimeZoneConverter
             "#{attribute}_time"

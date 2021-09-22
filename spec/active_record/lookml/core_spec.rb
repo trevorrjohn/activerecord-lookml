@@ -100,6 +100,11 @@ view: pulse_onboarding_statuses {
     }
   }
 
+  dimension: billing_uuid {
+    type: string
+    sql: ${TABLE}.billing_uuid ;;
+  }
+
   dimension: session_id {
     type: string
     sql: ${TABLE}.session_id ;;
@@ -127,6 +132,7 @@ view: pulse_onboarding_statuses {
       company_id,
       manager_tutorial_state,
       member_tutorial_state,
+      billing_uuid,
       session_id,
       completed,
       created_at_time,
